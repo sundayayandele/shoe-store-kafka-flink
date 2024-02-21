@@ -4,14 +4,14 @@
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_customers_keyed" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool
-  ]    
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool
+  ]
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
   }
@@ -39,13 +39,13 @@ resource "confluent_flink_statement" "create_shoe_customers_keyed" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_products_keyed" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -74,7 +74,7 @@ resource "confluent_flink_statement" "create_shoe_products_keyed" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_customers_keyed" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_customers_keyed
+    confluent_flink_statement.create_shoe_customers_keyed
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -103,7 +103,7 @@ resource "confluent_flink_statement" "insert_shoe_customers_keyed" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_products_keyed" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_products_keyed
+    confluent_flink_statement.create_shoe_products_keyed
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -132,15 +132,15 @@ resource "confluent_flink_statement" "insert_shoe_products_keyed" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_order_customer" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool,
-    resource.confluent_flink_statement.create_shoe_products_keyed,
-    resource.confluent_flink_statement.create_shoe_customers_keyed
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool,
+    confluent_flink_statement.create_shoe_products_keyed,
+    confluent_flink_statement.create_shoe_customers_keyed
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -169,7 +169,7 @@ resource "confluent_flink_statement" "create_shoe_order_customer" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_order_customer" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_order_customer
+    confluent_flink_statement.create_shoe_order_customer
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -198,16 +198,16 @@ resource "confluent_flink_statement" "insert_shoe_order_customer" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_order_customer_product" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool,
-    resource.confluent_flink_statement.create_shoe_products_keyed,
-    resource.confluent_flink_statement.create_shoe_customers_keyed,
-    resource.confluent_flink_statement.create_shoe_order_customer
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool,
+    confluent_flink_statement.create_shoe_products_keyed,
+    confluent_flink_statement.create_shoe_customers_keyed,
+    confluent_flink_statement.create_shoe_order_customer
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -236,7 +236,7 @@ resource "confluent_flink_statement" "create_shoe_order_customer_product" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_order_customer_product" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_order_customer_product
+    confluent_flink_statement.create_shoe_order_customer_product
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -265,17 +265,17 @@ resource "confluent_flink_statement" "insert_shoe_order_customer_product" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_loyalty_levels" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool,
-    resource.confluent_flink_statement.create_shoe_products_keyed,
-    resource.confluent_flink_statement.create_shoe_customers_keyed,
-    resource.confluent_flink_statement.create_shoe_order_customer,
-    resource.confluent_flink_statement.create_shoe_order_customer_product
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool,
+    confluent_flink_statement.create_shoe_products_keyed,
+    confluent_flink_statement.create_shoe_customers_keyed,
+    confluent_flink_statement.create_shoe_order_customer,
+    confluent_flink_statement.create_shoe_order_customer_product
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -304,7 +304,7 @@ resource "confluent_flink_statement" "create_shoe_loyalty_levels" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_loyalty_levels" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_loyalty_levels
+    confluent_flink_statement.create_shoe_loyalty_levels
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -333,18 +333,18 @@ resource "confluent_flink_statement" "insert_shoe_loyalty_levels" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "create_shoe_promotions" {
   depends_on = [
-    resource.confluent_environment.cc_handson_env,
-    resource.confluent_schema_registry_cluster.cc_sr_cluster,
-    resource.confluent_kafka_cluster.cc_kafka_cluster,
-    resource.confluent_connector.datagen_products,
-    resource.confluent_connector.datagen_customers,
-    resource.confluent_connector.datagen_orders,
-    resource.confluent_flink_compute_pool.cc_flink_compute_pool,
-    resource.confluent_flink_statement.create_shoe_products_keyed,
-    resource.confluent_flink_statement.create_shoe_customers_keyed,
-    resource.confluent_flink_statement.create_shoe_order_customer,
-    resource.confluent_flink_statement.create_shoe_order_customer_product,
-    resource.confluent_flink_statement.create_shoe_loyalty_levels
+    confluent_environment.cc_handson_env,
+    confluent_schema_registry_cluster.cc_sr_cluster,
+    confluent_kafka_cluster.cc_kafka_cluster,
+    confluent_connector.datagen_products,
+    confluent_connector.datagen_customers,
+    confluent_connector.datagen_orders,
+    confluent_flink_compute_pool.cc_flink_compute_pool,
+    confluent_flink_statement.create_shoe_products_keyed,
+    confluent_flink_statement.create_shoe_customers_keyed,
+    confluent_flink_statement.create_shoe_order_customer,
+    confluent_flink_statement.create_shoe_order_customer_product,
+    confluent_flink_statement.create_shoe_loyalty_levels
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id
@@ -373,7 +373,7 @@ resource "confluent_flink_statement" "create_shoe_promotions" {
 # --------------------------------------------------------
 resource "confluent_flink_statement" "insert_shoe_promotion" {
   depends_on = [
-    resource.confluent_flink_statement.create_shoe_promotions
+    confluent_flink_statement.create_shoe_promotions
   ]    
   compute_pool {
     id = confluent_flink_compute_pool.cc_flink_compute_pool.id

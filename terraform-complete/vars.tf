@@ -79,7 +79,7 @@ variable "sr_package" {
 # --------------------------------------------
 # Confluent Cloud Flink Compute Pool variables
 # --------------------------------------------
-variable "cc_dislay_name" {
+variable "cc_display_name" {
   type    = string
   default = "standard_compute_pool"
 }
