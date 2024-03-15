@@ -209,30 +209,3 @@ resource "confluent_api_key" "clients_kafka_cluster_key" {
     prevent_destroy = false
   }
 }
-
-# --------------------------------------------------------
-# Flink API Keys
-# --------------------------------------------------------
-resource "confluent_api_key" "env-manager-flink-api-key" {
-  display_name = "env-manager-flink-api-${confluent_environment.cc_handson_env.display_name}-key-${random_id.id.hex}"
-  description  = "Flink API Key that is owned by 'env-manager' service account"
-  owner {
-    id          = confluent_service_account.app_manager.id
-    api_version = confluent_service_account.app_manager.api_version
-    kind        = confluent_service_account.app_manager.kind
-  }
-
-  managed_resource {
-    id          = var.cc_compute_pool_region
-    api_version = "fcpm/v2"
-    kind        = "Region"
-
-    environment {
-      id = confluent_environment.cc_handson_env.id
-    }
-  }
-
-  lifecycle {
-    prevent_destroy = false
-  }
-}
